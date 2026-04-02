@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 
-void main() {
+main() {
   runApp(App());
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  var contLikes = 0;
+
+  void daLike() {
+    setState(() {
+      this.contLikes++;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,9 +30,17 @@ class App extends StatelessWidget {
           title: Text("titulo APP"),
         ),
         body: Center(
-          child: Column(children: [Text("oi"), Text("oie"), Text("ois"), 
-          IconButton(onPressed:(){}, icon: Icon(size:50, Icons.favorite))
-          ]),
+          child: Column(
+            children: [
+              Text("Olá, seja bem-vindo!"),
+              Text("conta dor de likes:"),
+              Text("dores do coração: ${this.contLikes}"),
+              IconButton(
+                onPressed: daLike,
+                icon: Icon(size: 50, Icons.favorite),
+              ),
+            ],
+          ),
         ),
       ),
     );
