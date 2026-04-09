@@ -1,4 +1,5 @@
-import 'package:aula3_navegacao/tela_secundaria.dart';
+import 'package:aula3_navegacao/pessoa.dart';
+import 'package:aula3_navegacao/rotas.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,22 +13,26 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var _dadosSalvos = false;
-  var _nome;
+  var _estaFeliz = false;
+  Pessoa? _pessoa;
   final _nomeController = TextEditingController();
 
-  void _mostra_dados() {
+  void _mostraDados() {
     setState(() {
-      print(_nomeController.text);
-      _nome = _nomeController.text;
-      _dadosSalvos = _nome != null && _nome != "";
+      _pessoa = Pessoa(
+          estaFeliz:  _estaFeliz,
+          nome:  _nomeController.text
+        );
+      _dadosSalvos = _pessoa?.nome != "";
     });
   }
 
-  void _troca_tela() {
+  void _trocaTela() {
     if (_dadosSalvos) {
-      Navigator.push(
+      Navigator.pushNamed(
         context,
-        MaterialPageRoute(builder: (context) => TelaDados(nome: _nome)),
+        Rotas.telaSecundaria,
+        arguments : _pessoa,
       );
     }
   }
@@ -48,15 +53,20 @@ class _HomePageState extends State<HomePage> {
                 border: OutlineInputBorder(),
               ),
             ),
+            CheckboxListTile(
+              title: Text("você esta feliz?"),
+              value: _estaFeliz,
+              onChanged: (bool? value) => setState(() => _estaFeliz = value==true),
+            ),
             ElevatedButton(
-              onPressed: _mostra_dados,
+              onPressed: _mostraDados,
               child: const Icon(Icons.done_outline_outlined),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _troca_tela,
+        onPressed: _trocaTela,
         tooltip: 'enviar',
         child: const Icon(Icons.navigate_next_rounded),
       ),

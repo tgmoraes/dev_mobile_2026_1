@@ -1,15 +1,14 @@
+import 'package:aula3_navegacao/pessoa.dart';
 import 'package:flutter/material.dart';
 
 class TelaDados extends StatelessWidget{
-  final String nome;
+  const TelaDados({super.key});
 
-  const TelaDados({super.key, required this.nome});
-
-
+  
   @override
   Widget build(BuildContext context) {
-    //final Aluno aluno = ModalRoute.of(context).settings.arguments as Aluno ;
-    // TODO: implement build
+    //! programador garante que nao sera nulo, pois tem uma rota associada
+    Pessoa pessoa = ModalRoute.of(context)?.settings.arguments as Pessoa ;
     return Scaffold(
       appBar: AppBar(
         title: Text("tela 2"),
@@ -21,7 +20,7 @@ class TelaDados extends StatelessWidget{
             Text("tela dois", 
               style: TextStyle(fontSize: 24)
               ),
-            Text("nome: $nome", 
+            Text("nome: ${pessoa.nome} e está ${pessoa.estaFeliz?"FELIZ! :)": "... triste :("}", 
               style: TextStyle( fontSize: 18)
               )
           ],
