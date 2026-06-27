@@ -1,3 +1,4 @@
+import '../providers/auth_provider.dart';
 import '../providers/pessoa_provider.dart';
 import '../util/rotas.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,21 @@ class _TelaListaState extends State<TelaLista> {
       appBar: AppBar(
         title: Text(widget.titulo),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        ),
+        actions:[
+          IconButton(
+            onPressed: () {
+              provider.carregaPessoas();
+            }, 
+            icon: const Icon(Icons.refresh)
+          ),
+          IconButton(
+            onPressed: () {
+              Provider.of<AuthProvider>(context, listen: false).logout();
+            }, 
+            icon: const Icon(Icons.logout),
+          ),
+        ]
+      ),
       body: ListView.builder(
           itemCount: pessoas.length,
           itemBuilder: (context, index) {

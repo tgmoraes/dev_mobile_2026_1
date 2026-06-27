@@ -11,7 +11,7 @@ class PessoaProvider with ChangeNotifier{
 
   Future<void> carregaPessoas() async{
     final response = await http.get(Uri.parse(_url));
-
+    _pessoas.clear();
     final dados = jsonDecode(response.body);
     dados.forEach((key, value) {
       value["id"] = key;

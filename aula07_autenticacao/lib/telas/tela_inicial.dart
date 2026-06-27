@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TelaInicial extends StatelessWidget {
-  const TelaInicial({Key? key}) : super(key: key);
+  const TelaInicial({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -87,8 +87,8 @@ class _FormLoginState extends State<FormLogin> {
                 decoration: const InputDecoration(labelText: 'E-mail (login)'),
                 keyboardType: TextInputType.emailAddress,
                 onSaved: (email) => _dadosForm['email'] = email ?? '', //acao de salvar formulario
-                validator: (_email) { //validacao
-                  final email = _email ?? '';
+                validator: (value) { //validacao
+                  final email = value ?? '';
                   if (!email.contains('@')) {
                     return 'Informe um e-mail válido.'; //com erro, com essa mensagem
                   }
